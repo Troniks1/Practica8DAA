@@ -80,7 +80,7 @@ void Vertex::set_Number(int number){
 *
 * @param[in]    name    El nombre.
 */
-void::Vertex::set_Name(std::string name){
+void Vertex::set_Name(std::string name){
     name_ = name;
 }
 
