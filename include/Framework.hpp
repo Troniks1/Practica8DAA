@@ -14,7 +14,6 @@
 #include "Chrono.hpp"
 #include "Algorithm.hpp"
 #include "GreedyAlgorithm.hpp"
-#include "AnotherGreedyAlgorithm.hpp"
 #include "GraspAlgorithm.hpp"
 #include "LocalSearchAlgorithm.hpp"
 

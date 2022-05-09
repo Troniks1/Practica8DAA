@@ -2,7 +2,7 @@
 =========================================================================================
     =                                                                              =
     =            Proyect:       Practica 8 Maximum Diversity                       =
-    =            File name:     Algorithm.hpp                                =
+    =            File name:     Algorithm.hpp                                      =
     =            Author:        Gabriel Melián Hernández                           =
     =                                                                              =
 =========================================================================================

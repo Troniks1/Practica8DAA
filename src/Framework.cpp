@@ -136,22 +136,18 @@ void FrameWork::initialize(void){
         case 1:
             algorithm_ = new GreedyAlgorithm();
             break;
-        
-        case 2:
-            algorithm_ = AnotherGreedyAlgorithm();
-            break;
 
-        case 3:
-            algorithm_ = LocalSearchAlgorithm();
+        case 2:
+            algorithm_ = new LocalSearchAlgorithm();
             break;
         
-        case 4:
+        case 3:
             int RLC, iterations;
             std::cout << std::endl << "Introduce el tamaño deseado para la LRC: " <<std::endl;
             std::cin >> RLC;
             std::cout << std::endl << "Introduce el número de iteraciones deseado: " << std::endl;
             std::cin >> iterations;
-            algorithm_ = new GraspAlgorithm(RLC, iteraciones);
+            algorithm_ = new GraspAlgorithm(RLC, iterations);
             break;
         
         case 0:
@@ -186,10 +182,9 @@ void FrameWork::executeFrameWork(void){
 */
 int FrameWork::printMenu(void){
     std::cout << std::endl << "Selecciona uno de los siguientes algoritmos: ";
-	std::cout << std::endl << "\t 1. Greedy Algorithm (Figura)";
-	std::cout << std::endl << "\t 2. Greedy Algorithm (Propio)";
-	std::cout << std::endl << "\t 3. Local Search Algorithm";
-	std::cout << std::endl << "\t 4. GRASP Algorithm";
+	std::cout << std::endl << "\t 1. Greedy Algorithm.";
+	std::cout << std::endl << "\t 2. Local Search Algorithm";
+	std::cout << std::endl << "\t 3. GRASP Algorithm";
 	std::cout << std::endl << "\t 0. Abort program";
 	std::cout << std::endl;
 	int selector;
