@@ -130,7 +130,7 @@ void BranchingAndPruningAlgorithm::set_PossibleVertex (std::vector<Vertex> possi
  * @param      graph  El grafo.
  */
 void BranchingAndPruningAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
-	std::cout << std::endl << "Select the LowerBound ";
+	std::cout << std::endl << "Selecciona la cota inferior: ";
 	float aux;
 	std::cin >> aux;
 	lowerBoundsVector_.resize(get_SolutionSize());
