@@ -149,6 +149,13 @@ void FrameWork::initialize(void){
             std::cin >> iterations;
             algorithm_ = new GraspAlgorithm(RLC, iterations);
             break;
+
+        case 4:
+			int strategy;
+			std::cout << std::endl << "Select the strategy mode:\n\t0. Expands the node with the lowest upperBound\n\t1. Expands the deepest node " << std::endl;
+			std::cin >> strategy;
+			algorithm_ = new BranchingAndPruningAlgorithm(strategy);
+			break;
         
         case 0:
             std::cout << std::endl << "Aborting Program . . ." << std::endl;
@@ -185,6 +192,7 @@ int FrameWork::printMenu(void){
 	std::cout << std::endl << "\t 1. Greedy Algorithm.";
 	std::cout << std::endl << "\t 2. Local Search Algorithm";
 	std::cout << std::endl << "\t 3. GRASP Algorithm";
+    std::cout << std::endl << "\t 4. BranchingAndPruning Algorithm";
 	std::cout << std::endl << "\t 0. Abort program";
 	std::cout << std::endl;
 	int selector;
