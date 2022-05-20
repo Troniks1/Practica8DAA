@@ -35,9 +35,9 @@ Graph::~Graph(){
 }
 
 /**
-* @brief    Consigue el vector.
+* @brief    Consigue el vector de vértices.
 *
-* @return   El vector.
+* @return   El vector de vértices.
 */
 std::vector<Vertex> Graph::get_Vertex(void) const{
     return vertex_;
@@ -53,9 +53,9 @@ std::string Graph::get_TextFile(void) const{
 }
 
 /**
-* @brief    Consigue el número de vectores.
+* @brief    Consigue el número de vértices.
 *
-* @return   El número de vectores.
+* @return   El número de vértices.
 */
 int Graph::get_VertexNum(void) const{
     return vertexNum_;
@@ -71,9 +71,9 @@ int Graph::get_CoordinatesNum(void) const{
 }
 
 /**
-* @brief    Establece el vector.
+* @brief    Establece el vector de vértices.
 *
-* @param[in]    vertex  El vector.
+* @param[in]    vertex  El vector de vértices.
 */
 void Graph::set_Vertex(std::vector<Vertex> vertex){
     vertex_ = vertex;
@@ -89,9 +89,9 @@ void Graph::set_TextFile(std::string textFile){
 }
 
 /**
-* @brief Establece el número de vectores.
+* @brief Establece el número de vértices.
 *
-* @param[in]    vertexNum   El número de vectores.
+* @param[in]    vertexNum   El número de vértices.
 */
 void Graph::set_VertexNum(int vertexNum){
     vertexNum_ = vertexNum;

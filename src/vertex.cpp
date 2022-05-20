@@ -109,7 +109,7 @@ void Vertex::operator=(const Vertex& vertex){
 }
 
 /**
-* @brief    Genera el nombre del vector.
+* @brief    Genera el nombre del vértice.
 */
 void Vertex::generateName(void){
     std::string name = "Vertex ";

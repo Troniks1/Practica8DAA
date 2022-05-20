@@ -54,9 +54,9 @@ int Algorithm::get_SolutionSize(void) const{
 }
 
 /**
-* @brief    Consigue el Free vector.
+* @brief    Consigue el vector de vértices libres.
 *
-* @return   El free Vector.
+* @return   El vector de vértices libres.
 */
 std::vector<Vertex>& Algorithm::get_FreeVertex(void){
     return freeVertex_;
@@ -81,9 +81,9 @@ void Algorithm::set_Diversity(float diversity){
 }
 
 /**
-* @brief    Establece el vector free.
+* @brief    Establece el vector de vértices libres.
 *
-* @param[in]    freeVertex  El vector free.
+* @param[in]    freeVertex  El vector de vértices libres.
 */
 void Algorithm::set_FreeVertex(std::vector<Vertex> freeVertex){
     freeVertex_.clear();
@@ -131,7 +131,7 @@ std::ostream& Algorithm::printResult(std::ostream& os, Chrono& chrono){
 }
 
 /**
-* @brief    Consigue la diversidad de un vector de vectores.
+* @brief    Consigue la diversidad de un vector de vértices.
 *
 * @param    vertex  El vector.
 *
@@ -156,7 +156,7 @@ float Algorithm::findDiversity(std::vector<Vertex>& vertex){
 *
 * @param    vertex  El vector.
 *
-* @return   El vector con el centro de gravedad.
+* @return   El centro de gravedad.
 */
 Vertex Algorithm::generateGravityCenter(std::vector<Vertex>& vertex){
     std::vector<float> gravityCenter;
@@ -176,12 +176,12 @@ Vertex Algorithm::generateGravityCenter(std::vector<Vertex>& vertex){
 }
 
 /**
-* @brief    Encuentra el vector mas alejado del centro de gravedad.
+* @brief    Encuentra el vértice mas alejado del centro de gravedad.
 *
-* @param    vertex  El vector.
+* @param    vertex  El vector de vértices.
 * @param    gravityCenter   El centro de gravedad.
 *
-* @return   El numero del vector.
+* @return   El numero del vértice.
 */
 int Algorithm::findFurthestFromGravityCenter(std::vector<Vertex>& vertex, Vertex& gravityCenter){
     int number = 0;
@@ -201,12 +201,12 @@ int Algorithm::findFurthestFromGravityCenter(std::vector<Vertex>& vertex, Vertex
 }
 
 /**
-* @brief    Consigue la posicion en el vector de un vector dado.
+* @brief    Consigue la posicion en el vector de un vértice dado.
 *
-* @param    vertex  El vector.
+* @param    vertex  El vector de vértices.
 * @param[in]    vertexNum   El numero del vector.
 *
-* @return   La posición del vector.
+* @return   La posición del vértice.
 */
 int Algorithm::getPositionFromVector(std::vector<Vertex>& vertex, int vertexNum){
     for(int i = 0; i < vertex.size(); i++){
@@ -218,9 +218,9 @@ int Algorithm::getPositionFromVector(std::vector<Vertex>& vertex, int vertexNum)
 }
 
 /**
-* @brief    Añade un vector al vector y lo borra del vector free.
+* @brief    Añade un vértice al vector y lo borra del vector de vértices libres.
 *
-* @param    vertex  El vector.
+* @param    vertex  El vector de vértices.
 * @param[in]    vertexNum   El número del vector.
 */
 void Algorithm::addition(std::vector<Vertex>& vertex, int& vertexNum){
@@ -229,11 +229,11 @@ void Algorithm::addition(std::vector<Vertex>& vertex, int& vertexNum){
 }
 
 /**
- * @brief      Intercambia un vector con otro del vector de freeSolution
+ * @brief      Intercambia un vértice con otro.
  *
- * @param      vertex         El vector.
+ * @param      vertex         El vector de vértices.
  * @param[in]  vertexNum      El número del vector.
- * @param[in]  freeVertexNum  El número del vector free.
+ * @param[in]  freeVertexNum  El número del vector de vértices libres.
  */
 void Algorithm::swap (std::vector<Vertex>& vertex, int& vertexNum, int& freeVertexNum) {
 	addition(vertex, freeVertexNum);
@@ -241,9 +241,9 @@ void Algorithm::swap (std::vector<Vertex>& vertex, int& vertexNum, int& freeVert
 }
 
 /**
- * @brief      Extrae un vector del vector dado y lo introduce en el freeVector.
+ * @brief      Extrae un vértice del vector dado y lo introduce en el vector de vértices libres.
  *
- * @param      vertex     El vector.
+ * @param      vertex     El vector de vértices.
  * @param      vertexNum  El número del vector.
  */
 void Algorithm::extraction (std::vector<Vertex>& vertex, int& vertexNum) {
@@ -252,11 +252,11 @@ void Algorithm::extraction (std::vector<Vertex>& vertex, int& vertexNum) {
 }
 
 /**
- * @brief      Consigue un vector random del vector.
+ * @brief      Consigue un vértice random del vector.
  *
  * @param[in]  vector   El vector.
  *
- * @return     El vector random.
+ * @return     El vértice random.
  */
 int Algorithm::getRandomVertex (std::vector<Vertex>& vector) {
 	if (vector.size() > 0) {
