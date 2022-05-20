@@ -10,6 +10,7 @@
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
 #include "../include/GraspAlgorithm.hpp"
+#include <time.h>
 
 /*------------------------------------------------*/
 
@@ -23,7 +24,7 @@ GraspAlgorithm::GraspAlgorithm(){
 * @brief    Construye una nueva instancia.
 */
 GraspAlgorithm::GraspAlgorithm(int RLC, int iterations){
-    set_RLC(RLC);
+    set_RLCGC(RLC);
     set_Iterations(iterations);
 }
 
@@ -34,12 +35,12 @@ GraspAlgorithm::~GraspAlgorithm(){
 }
 
 /**
-* @brief    Consigue la RLC.
+* @brief    Consigue la RLCGC.
 *
-* @return   La RLC.
+* @return   La RLCGC.
 */
-int GraspAlgorithm::get_RLC(void) const{
-    return RLC_;
+int GraspAlgorithm::get_RLCGC(void){
+    return RLCGC_;
 }
 
 /**
@@ -52,12 +53,12 @@ int GraspAlgorithm::get_Iterations(void) const{
 }
 
 /**
-* @brief    Establece la RLC.
+* @brief    Establece la RLCGC.
 *
-* @param[in]    RLC La RLC.
+* @param[in]    RLCGC La RLCGC.
 */
-void GraspAlgorithm::set_RLC(int RLC){
-    RLC_ = RLC;
+void GraspAlgorithm::set_RLCGC(int RLC){
+    RLCGC_ = RLC;
 }
 
 /**
@@ -76,69 +77,69 @@ void GraspAlgorithm::set_Iterations(int iterations){
 */
 void GraspAlgorithm::runAlgorithm(Graph& graph, Chrono& chrono){
     chrono.startChrono();
-    std::vector<Vertex> solution;
-    set_FreeVertex(graph.get_Vertex());
-    //Fase Constructiva.
-    do{
-        int candidate = getRandomVertex(get_FreeVertex());
-        addition(solution, candidate);
-    }while( solution.size() < get_SolutionSize());
-    //Fase de Mejora.
+    float tmpDiversity = 0.0;
     int counter = 0;
+    std::vector<Vertex> tmpSolution;
+    std::vector<Vertex> solution;
+    while(counter < get_Iterations()){  
+    set_FreeVertex(graph.get_Vertex());
+    Vertex gravityCenter;
+    gravityCenter = generateGravityCenter(get_FreeVertex());
+    while(solution.size() < get_SolutionSize()){
+        std::vector<int> RLCGCvector;
+        std::vector<Vertex> prueba = get_FreeVertex();
+        generateRLCGC(RLCGCvector, prueba, gravityCenter);
+        int candidate = rand() % RLCGCvector.size();
+        int elementAdded = RLCGCvector[candidate];
+        addition(solution, elementAdded);
+        gravityCenter = generateGravityCenter(solution);
+    } 
     float diversity = findDiversity(solution);
-    do{
-        std::vector<Vertex> tmpSolution = solution;
-        std::vector<Vertex> RLCvector;
-        generateRLC(RLCvector, tmpSolution);
-        int candidateIntroduce = getRandomVertex(RLCvector);
-        int candidateExtract = getRandomVertex(tmpSolution);
-        //Swap
-        tmpSolution.erase(tmpSolution.begin() + candidateExtract);
-        tmpSolution.push_back(RLCvector[candidateIntroduce]);
-        float tmpDiversity = findDiversity(tmpSolution);
-        if(tmpDiversity > diversity){
-            int pos = getPositionFromVector(get_FreeVertex(), RLCvector[candidateIntroduce].get_Number());
-            if(pos != -1){
-                diversity = tmpDiversity;
-                swap(solution, candidateExtract, pos);
-            }
-        }
-        counter++;
-    }while(counter < get_Iterations());
-    set_Solution(solution);
-    set_Diversity(findDiversity(solution));
+    if(tmpDiversity < diversity){
+        tmpDiversity = diversity;
+        tmpSolution = solution;
+        solution.clear();
+        diversity = 0.0;
+    }
+    if(tmpDiversity > diversity){
+        solution.clear();
+        diversity = 0.0;
+    }
+    counter++;
+    }
+    set_Solution(tmpSolution);
+    set_Diversity(findDiversity(tmpSolution));
     chrono.stopChrono();
 }
 
 /**
-* @brief    Genera una RLC.
+* @brief    Genera una RLCGC.
 *
-* @param    RLC La RLC.
-* @param[in]    solution    La solución.
+* @param    RLCGC La RLCGC.
+* @param[in]    vertex    El vector de vértices.
 */
-void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex>& solution){
-    std::vector<Vertex> tmpSolution;
-    std::vector<float> diversities;
-    int diversity = findDiversity(solution);
-    for(int i = 0; i < get_FreeVertex().size(); i ++){
-        std::vector<Vertex> tmp = solution;
-        tmp.push_back(get_FreeVertex()[i]);
-        int tmpDiversity = findDiversity(tmp);
-        if(tmpDiversity > diversity){
-            tmpSolution.push_back(get_FreeVertex()[i]);
-            diversities.push_back(tmpDiversity);
+void GraspAlgorithm::generateRLCGC(std::vector<int>& RLCGC, std::vector<Vertex>& vertex, Vertex& gravityCenter){
+    RLCGC.clear();
+    int contador = 0;
+    std::vector<Vertex> prueba = vertex;
+    while(contador < get_RLCGC() ){
+        
+        int number = 0;
+        float diversity_ = -9999999;
+        for(int i = 0; i < prueba.size(); i++){
+        std::vector<Vertex> tmp;
+        tmp.resize(2);
+        tmp[0] = gravityCenter;
+        tmp[1] = prueba[i];
+        float diversity = findDiversity(tmp);
+        if(diversity_ < diversity){
+            number = i;
+            diversity_ = diversity;
         }
     }
-    while(tmpSolution.size() >= get_RLC()){
-        int pos = 0;
-        float min = diversities[0];
-        for(int i = 1; i < tmpSolution.size(); i++){
-            if(diversities[i] < min){
-                min = diversities[i];
-                pos = 1;
-            }
-        }
-        tmpSolution.erase(tmpSolution.begin() + pos);
+    //std::cout << number << std::endl;
+    prueba.erase(prueba.begin() + number);
+    RLCGC.push_back(number);
+    contador++;
     }
-    RLC = tmpSolution;
 }

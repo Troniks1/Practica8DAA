@@ -22,8 +22,8 @@
 class GraspAlgorithm : public Algorithm{
 
     private:
-        int RLC_;
         int iterations_;
+        int RLCGC_;
 
     public:
         //Constructores y Destructor.
@@ -32,9 +32,9 @@ class GraspAlgorithm : public Algorithm{
         virtual ~GraspAlgorithm();
 
         //Setters y Getters.
-        int get_RLC(void) const;
+        int get_RLCGC(void);
+        void set_RLCGC(int RLC);
         int get_Iterations(void) const;
-        void set_RLC(int RLC);
         void set_Iterations(int iterations);
 
         //Funciones.
@@ -42,5 +42,5 @@ class GraspAlgorithm : public Algorithm{
 
     private:
         //Funciones.
-        void generateRLC(std::vector<Vertex>& RLCvector, std::vector<Vertex>& solution);
+        void generateRLCGC(std::vector<int>& RLCGCvector, std::vector<Vertex>& solution, Vertex& gravityCenter);
 };
